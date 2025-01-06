@@ -66,8 +66,8 @@ final class CharacterTableViewCell: UITableViewCell {
         return label
     }()
 
-    private let statusLabel: CustomUILabel = {
-        let label = CustomUILabel()
+    private let statusLabel: StatusLabel = {
+        let label = StatusLabel()
         label.font = UIFont.systemFont(ofSize: 17)
         label.layer.cornerRadius = 12
         label.clipsToBounds = true
@@ -189,20 +189,5 @@ final class CharacterTableViewCell: UITableViewCell {
             statusLabel.backgroundColor = .green.withAlphaComponent(0.2)
             statusLabel.textColor = UIColor(red: 34/255, green: 139/255, blue: 34/255, alpha: 1)
         }
-    }
-}
-
-class CustomUILabel: UILabel {
-    var textInsets = UIEdgeInsets(top: 5, left: 9, bottom: 5, right: 9)
-
-    override func drawText(in rect: CGRect) {
-        let paddedRect = rect.inset(by: textInsets)
-        super.drawText(in: paddedRect)
-    }
-
-    override var intrinsicContentSize: CGSize {
-        let size = super.intrinsicContentSize
-        return CGSize(width: size.width + textInsets.left + textInsets.right,
-                       height: size.height + textInsets.top + textInsets.bottom)
     }
 }
