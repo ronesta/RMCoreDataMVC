@@ -64,16 +64,22 @@ final class NetworkManager {
         URLSession.shared.dataTask(with: url) { data, _, error in
             if let error {
                 print("Failed to load image: \(error.localizedDescription)")
-                completion(nil, error)
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
                 return
             }
 
             guard let data else {
                 print("No data for image")
-                completion(nil, NetworkError.noData)
+                DispatchQueue.main.async {
+                    completion(nil, NetworkError.noData)
+                }
                 return
             }
-            completion(data, nil)
+            DispatchQueue.main.async {
+                completion(data, nil)
+            }
         }.resume()
     }
 }
